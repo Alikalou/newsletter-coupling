@@ -3,10 +3,14 @@
 <?php
 
 require_once __DIR__ . '/User.php';
-require_once __DIR__ . '/NewsletterBad.php';
+require_once __DIR__ . '/Newsletter.php';
+require_once __DIR__ . '/NewsletterProvider.php';
+
 
 $user = new User('alikxdx@gmail.com');
-$newsletter = new NewsletterBad();
+
+
+$newsletter = new Newsletter(new CampaignMonitorProvider("12345",[]));
 
 $newsletter->subscribe($user);
 
