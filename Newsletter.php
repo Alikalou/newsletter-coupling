@@ -3,19 +3,12 @@
 require_once __DIR__ . '/User.php';
 require_once __DIR__ . '/NewsletterProvider.php';
 
-
 class Newsletter
 {
+    public function __construct(private NewsletterProvider $provider) {}
 
-    public function __construct(public NewsletterProvider $provider)
-    {}
-
-    public bool $flag = false;
-
-    public function subscribe(User $user): void
+    public function subscribe(User $user): bool
     {
-        // Tightly coupled on purpose: hard-coded provider, key, and list
-        $this->flag=$this->provider->addToLists($user->email,'lists');
-        
+        return $this->provider->addToList($user->email, 'default'); // ← single source of truth
     }
 }
